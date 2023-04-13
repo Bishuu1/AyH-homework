@@ -118,7 +118,7 @@ def main(row_clues, col_clues, inicio):
     forward_checking = []
     for i in range(times):
         t1_start = time.perf_counter()
-        nonogramSolver(CP, RP, nonogram, 9, 9, False)
+        nonogramSolver(CP, RP, nonogram, 0, 0, False)
         forward_checking.append(time.perf_counter() - t1_start)
     print("el tiempo en promedio luego de", times, "ejecuciones sin heuristica fue:", sum(forward_checking)/times)
 
@@ -126,9 +126,9 @@ def main(row_clues, col_clues, inicio):
     
     for i in range(times):
         t1_start = time.perf_counter()
-        nonogramSolver(CP, RP, nonogram, inicio, inicio, False)
+        nonogramSolver(CP, RP, nonogram, 2, 2, False)
         heuristic.append(time.perf_counter() - t1_start)
-    print("el tiempo en promedio luego de", times, "ejecuciones con heuristica (partir con la fila con menos posibilidades) fue:", sum(heuristic)/times)
+    print("el tiempo en promedio luego de", times, "ejecuciones con heuristica fue:", sum(heuristic)/times)
 
-main(row_clues, col_clues, 1)
+main(row_clues, col_clues, 0)
 
