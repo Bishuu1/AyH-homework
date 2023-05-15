@@ -52,21 +52,41 @@ def greedy_estocastico(data):
                 # Si orden_estocastico esta vacio, se agrega el primer elemento
                 if not orden_estocastico:
                     orden_estocastico.append(each)
-                    orden_estocastico[-1].append(each[1][1]) # Se agrega el tiempo de aterrizaje: [id, limite, tiempos_requeridos, tiempo_aterrizaje]
-                    print(orden_estocastico[-1], " costo parcial: ", costo) 
+                    #orden_estocastico[-1].append(each[1][1]) # Se agrega el tiempo de aterrizaje: [id, limite, tiempos_requeridos, tiempo_aterrizaje]
+                    #print(orden_estocastico[-1])
+                    #print(orden_estocastico[-1], " costo parcial: ", costo) 
                 else:
                     tiempo_req = orden_estocastico[-1][2][each[0] - 1] # Se obtiene el tiempo requerido para que el uav aterrice dado el uav anterior
                     if tiempo_req < each[1][2]: # Si el tiempo requerido es menor al tiempo maximo de aterrizaje
                         orden_estocastico.append(each)
-                        orden_estocastico[-1].append(max(each[1][1], orden_estocastico[-2][-1] + tiempo_req))
-                        dif = abs(orden_estocastico[-1][-1] - orden_estocastico[-1][1][1])
-                        costo += dif
-                        print(orden_estocastico[-1]," dif: ",dif," costo parcial: ", costo) 
-                    else:
+                        #orden_estocastico[-1].append(max(each[1][1], orden_estocastico[-2][-1] + tiempo_req))
+                        #dif = abs(orden_estocastico[-1][-1] - orden_estocastico[-1][1][1])
+                        #costo += dif
+                        #print(orden_estocastico[-1])
+                        #print(orden_estocastico[-1]," costo parcial: ", costo) 
+                    else: # Si el tiempo requerido es mayor al tiempo maximo de aterrizaje se vuelve a guardar
                         data.append(each)
     return orden_estocastico
 
-uavs = leer_archivo("t2_Titan.txt")
-sorted_data = sorted(uavs, key=lambda x: x[1][1])
+def costo(aterrizajes):
+    costo = 0
+    reloj = 0
+    for i, each in enumerate(aterrizajes):
+        if i == 0:    
+            reloj = each[1][1]
+        if i != 0:
+            tiempo_req = aterrizajes[i - 1][2][each[0] - 1]
+            aterrizaje = max(each[1][1], reloj + tiempo_req)
+            reloj = aterrizaje
+            dif = abs(each[1][1] - reloj)
+            costo += dif
+    return costo
 
-greedy_estocastico(sorted_data)
+""" uavs = leer_archivo("t2_Titan.txt")
+sorted_data = sorted(uavs, key=lambda x: x[1][1])
+estocastico = greedy_estocastico(sorted_data)
+costo = costo(estocastico)
+
+print("Greedy estocastico:")
+pretty_print(estocastico)
+print("Costo: ", costo) """
