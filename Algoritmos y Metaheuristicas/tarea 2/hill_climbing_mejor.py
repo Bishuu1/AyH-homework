@@ -2,13 +2,12 @@ import copy
 import time
 import random
 from greedy_estocastico import leer_archivo, pretty_print, greedy_estocastico, costo
-def hill_climbing_alguna_mejora(data):
+def hill_climbing_mejor_mejora(data):
     # Dado un orden estocastico, se intenta mejorar el orden de aterrizaje de los uavs
-    # Para esto, se toma un uav y se mueve a la derecha hasta encontrar una mejora de costo
+    # Para esto, se toma un uav y se mueve a la derecha hasta encontrar la mejor mejora de costo
     # Si el costo del nuevo orden es menor, se acepta el cambio
     # Si el costo del nuevo orden es mayor, se rechaza el cambio
-    # Si el costo del nuevo orden es igual, se acepta el cambio
-    # Se repite el proceso hasta que no se pueda mejorar el orden
+    # Si el costo del nuevo orden es igual, se rechaza el cambio
     # Se retorna el mejor orden encontrado
     costo_actual = costo(data)
     mejor_orden = copy.deepcopy(data)
@@ -19,9 +18,8 @@ def hill_climbing_alguna_mejora(data):
     for i in range(len(mejor_orden)):
         n = i
         orden_actual = copy.deepcopy(mejor_orden)
-        flag = True
-        while flag:
-            if n < len(orden_actual) - 1:  # Verifica que no sea el último elemento
+        while n < len(orden_actual) - 1:
+            #if n < len(orden_actual) - 1:  # Verifica que no sea el último elemento
                 valor_actual = orden_actual[n]
                 valor_siguiente = orden_actual[n+1]
                 orden_actual[n] = valor_siguiente
@@ -29,11 +27,10 @@ def hill_climbing_alguna_mejora(data):
                 n += 1
                 if costo(orden_actual) < costo_actual:
                     #print("posicion ",i," con valor ",valor_actual[0] , " se mueve a: ", n+1)
-                    costo_actual = costo(orden_actual)
-                    mejor_orden = copy.deepcopy(orden_actual)
-                    flag = False
-            else:
-                break
+                        costo_actual = costo(orden_actual)
+                        mejor_orden = copy.deepcopy(orden_actual)
+            #else:
+                #break
     print("costo final: ", costo_actual)
     
     #print("orden final: ")
@@ -51,14 +48,14 @@ def pruebas(sorted_data):
 uavs = leer_archivo("t2_Titan.txt")
 sorted_data = sorted(uavs, key=lambda x: x[1][1])
 estocastico = pruebas(sorted_data)
-print("Hill Climbing con alguna mejora: ")
-hill_climbing_alguna_mejora(estocastico[0])
+print("Hill Climbing mejor-mejora: ")
+hill_climbing_mejor_mejora(estocastico[0])
 print("------------------------------------")
-hill_climbing_alguna_mejora(estocastico[1])
+hill_climbing_mejor_mejora(estocastico[1])
 print("------------------------------------")
-hill_climbing_alguna_mejora(estocastico[2])
+hill_climbing_mejor_mejora(estocastico[2])
 print("------------------------------------")
-hill_climbing_alguna_mejora(estocastico[3])
+hill_climbing_mejor_mejora(estocastico[3])
 print("------------------------------------")
-hill_climbing_alguna_mejora(estocastico[4])
+hill_climbing_mejor_mejora(estocastico[4])
 print("------------------------------------")

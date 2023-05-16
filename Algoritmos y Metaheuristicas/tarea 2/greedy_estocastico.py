@@ -40,9 +40,10 @@ def pretty_print(arr):
 
 # Algoritmo Greedy estocastico
 
-def greedy_estocastico(data):   
+def greedy_estocastico(data, seed):   
     orden_estocastico = []
     costo = 0
+    random.seed(seed)
     # Ahora, con los datos ordenados procederemos a asignar el aterrizaje de cada UAV dada una probabilidad de 0.5, en caso de no elegirse se pasa a al siguiente uav, así sucesivamente hasta haber introducido todos los uavs.
     while(data):
         for i in data:
@@ -82,11 +83,20 @@ def costo(aterrizajes):
             costo += dif
     return costo
 
-""" uavs = leer_archivo("t2_Titan.txt")
-sorted_data = sorted(uavs, key=lambda x: x[1][1])
-estocastico = greedy_estocastico(sorted_data)
-costo = costo(estocastico)
 
-print("Greedy estocastico:")
-pretty_print(estocastico)
-print("Costo: ", costo) """
+uavs = leer_archivo("t2_Titan.txt")
+sorted_data = sorted(uavs, key=lambda x: x[1][1])
+
+def pruebas(sorted_data):
+    array = ["prueba 1", "prueba 2", "prueba 3", "prueba 4", "prueba 5"]
+    pruebas = []
+    for each in array:
+        value = copy.deepcopy(sorted_data)
+        pruebas.append(greedy_estocastico(value, each))
+    return pruebas
+
+pruebas = pruebas(sorted_data)
+#print("Pruebas: ")
+
+for i, each in enumerate(pruebas):
+    print("Costo de prueba ",i,": ",  costo(each))
