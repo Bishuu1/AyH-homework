@@ -1,7 +1,7 @@
 import copy
 import time
 import random
-from greedy_estocastico import leer_archivo, pretty_print, greedy_estocastico, costo
+from greedy_estocastico import leer_archivo, pretty_print, greedy_estocastico, costo, europa, titan, deimos, pruebas
 def hill_climbing_mejor_mejora(data):
     # Dado un orden estocastico, se intenta mejorar el orden de aterrizaje de los uavs
     # Para esto, se toma un uav y se mueve a la derecha hasta encontrar la mejor mejora de costo
@@ -45,17 +45,44 @@ def pruebas(sorted_data):
         pruebas.append(greedy_estocastico(value, each))
     return pruebas
 
-uavs = leer_archivo("t2_Titan.txt")
-sorted_data = sorted(uavs, key=lambda x: x[1][1])
-estocastico = pruebas(sorted_data)
+#Titan
+titan = titan()
 print("Hill Climbing mejor-mejora: ")
-hill_climbing_mejor_mejora(estocastico[0])
+hill_climbing_mejor_mejora(titan[0])
 print("------------------------------------")
-hill_climbing_mejor_mejora(estocastico[1])
+hill_climbing_mejor_mejora(titan[1])
 print("------------------------------------")
-hill_climbing_mejor_mejora(estocastico[2])
+hill_climbing_mejor_mejora(titan[2])
 print("------------------------------------")
-hill_climbing_mejor_mejora(estocastico[3])
+hill_climbing_mejor_mejora(titan[3])
 print("------------------------------------")
-hill_climbing_mejor_mejora(estocastico[4])
+hill_climbing_mejor_mejora(titan[4])
+print("------------------------------------")
+
+#Europa
+europa = europa()
+print("Hill Climbing mejor-mejora: ")
+hill_climbing_mejor_mejora(europa[0])
+print("------------------------------------")
+hill_climbing_mejor_mejora(europa[1])
+print("------------------------------------")
+hill_climbing_mejor_mejora(europa[2])
+print("------------------------------------")
+hill_climbing_mejor_mejora(europa[3])
+print("------------------------------------")
+hill_climbing_mejor_mejora(europa[4])
+print("------------------------------------")
+
+#Deimos
+deimos = deimos()
+print("Hill Climbing mejor-mejora: ")
+hill_climbing_mejor_mejora(deimos[0])
+print("------------------------------------")
+hill_climbing_mejor_mejora(deimos[1])
+print("------------------------------------")
+hill_climbing_mejor_mejora(deimos[2])
+print("------------------------------------")
+hill_climbing_mejor_mejora(deimos[3])
+print("------------------------------------")
+hill_climbing_mejor_mejora(deimos[4])
 print("------------------------------------")

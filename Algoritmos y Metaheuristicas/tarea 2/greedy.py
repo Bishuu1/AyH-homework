@@ -49,28 +49,38 @@ def greedy(archivo):
     # Ahora, con los datos ordenados procederemos a asignar el aterrizaje de cada UAV en tiempo preferido en caso de ser posible, es decir, si el tiempo preferido es mayor o igual al tiempo del aterrizaje anterior más el tiempo de espera del UAV.
     # En caso contrario, se asignará el siguiente mejor tiempo posible.
     # Para esto, se creará una lista de lanzamientos que se irá llenando conforme se asignen los lanzamientos de los UAVs.
-    # UAVs = [id, [min, pref, max], [tiempos requeridos]]
-
-    # [id, tiempo de aterrizaje, diferencia tiempo preferido y tiempo de aterrizaje]
-    Aterrizajes = ([])
-    costo = 0
+    Aterrizajes = []
     for each in sorted_data:
         if len(Aterrizajes) == 0:
-            Aterrizajes.append([each[0], each[1][1], 0])
-            tiempos = each[2]
-            # guardar tiempos requeridos para iteración siguiente ocuparlos para calcular costo y tiempo de aterrizaje
+            Aterrizajes.append(each)
         else:
-            # maximo entre tiempo preferido y tiempo de aterrizaje anterior + tiempo requerido
-            Aterrizajes.append(
-                [each[0], max(each[1][1], Aterrizajes[-1][1] + tiempos[each[0] - 1])])
+            Aterrizajes.append(each)
+    return Aterrizajes
 
-            Aterrizajes[-1].append(abs(Aterrizajes[-1][1] - each[1][1]))
+def costo(aterrizajes):
+    costo = 0
+    reloj = 0
+    for i, each in enumerate(aterrizajes):
+        if i == 0:    
+            reloj = each[1][1]
+        if i != 0:
+            tiempo_req = aterrizajes[i - 1][2][each[0] - 1]
+            aterrizaje = max(each[1][1], reloj + tiempo_req)
+            reloj = aterrizaje
+            dif = abs(each[1][1] - reloj)
+            costo += dif
+            if reloj > each[1][2]:
+                costo += 1000000
+            elif reloj < each[1][0]:
+                costo += 1000000
+            
+    return costo
 
-            # costo es la diferencia entre tiempo preferido y tiempo de aterrizaje real
-            costo += abs(Aterrizajes[-1][1] - each[1][1])
-            tiempos = each[2]
-    print("Costo: ", costo)
-    print("Aterrizajes: ", Aterrizajes)
+greedy1 = greedy("t2_Titan.txt")
+print("Costo para Titan: ", costo(greedy1))
 
+greedy2 = greedy("t2_Europa.txt")
+print("Costo para Europa: ", costo(greedy2))
 
-greedy("t2_Titan.txt")
+greedy3 = greedy("t2_Deimos.txt")
+print("Costo para Deimos: ", costo(greedy3))
