@@ -1,7 +1,7 @@
 import copy
 import time
 import random
-from greedy_estocastico import leer_archivo, pretty_print, greedy_estocastico, costo, europa, titan, deimos, pruebas
+from greedy_estocastico import costo, europa, titan, deimos
 def hill_climbing_alguna_mejora(data):
     # Dado un orden estocastico, se intenta mejorar el orden de aterrizaje de los uavs
     # Para esto, se toma un uav y se mueve a la derecha hasta encontrar una mejora de costo

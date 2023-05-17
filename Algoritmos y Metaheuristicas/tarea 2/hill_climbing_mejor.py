@@ -1,7 +1,7 @@
 import copy
 import time
 import random
-from greedy_estocastico import leer_archivo, pretty_print, greedy_estocastico, costo, europa, titan, deimos, pruebas
+from greedy_estocastico import costo, europa, titan, deimos
 def hill_climbing_mejor_mejora(data):
     # Dado un orden estocastico, se intenta mejorar el orden de aterrizaje de los uavs
     # Para esto, se toma un uav y se mueve a la derecha hasta encontrar la mejor mejora de costo
@@ -37,13 +37,6 @@ def hill_climbing_mejor_mejora(data):
     #pretty_print(mejor_orden)
     return mejor_orden
 
-def pruebas(sorted_data):
-    array = ["prueba 1", "prueba 2", "prueba 3", "prueba 4", "prueba 5"]
-    pruebas = []
-    for each in array:
-        value = copy.deepcopy(sorted_data)
-        pruebas.append(greedy_estocastico(value, each))
-    return pruebas
 
 #Titan
 titan = titan()

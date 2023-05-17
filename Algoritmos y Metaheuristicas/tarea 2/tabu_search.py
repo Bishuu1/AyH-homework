@@ -1,5 +1,5 @@
 import copy
-from greedy_estocastico import leer_archivo, greedy_estocastico, costo
+from greedy_estocastico import leer_archivo, greedy_estocastico, costo, europa, titan, deimos
 
 def tabu_search(data, max_tabu_size, max_iterations):
     # Initialize the best solution as the current one
