@@ -1,11 +1,9 @@
 import copy
-from greedy_estocastico import leer_archivo, greedy_estocastico, costo, europa, titan, deimos
+from greedy import costo, europa_greedy, titan_greedy, deimos_greedy
 
 def tabu_search(data, max_tabu_size, max_iterations):
     # Initialize the best solution as the current one
-    print("helloS")
     best_solution = copy.deepcopy(data)
-    print("hello")
     best_cost = costo(data)
 
     tabu_list = [best_solution]
@@ -25,7 +23,7 @@ def tabu_search(data, max_tabu_size, max_iterations):
 
         if len(tabu_list) > max_tabu_size:
             tabu_list.pop(0)
-
+    print("costo final: ", best_cost)
     return best_solution
 
 
@@ -39,7 +37,6 @@ def get_neighbors(data):
     return neighbors
 
 def find_best_neighbor(neighbors):
-    print("searching jeje", len(neighbors))
     best_cost = float('inf')
     best_neighbor = None
     for neighbor in neighbors:
@@ -49,19 +46,47 @@ def find_best_neighbor(neighbors):
             best_neighbor = neighbor
     return best_neighbor, best_cost
 
-def pruebas(sorted_data):
-    array = ["prueba 1", "prueba 2"]
-    pruebas = []
-    for each in array:
-        value = copy.deepcopy(sorted_data)
-        pruebas.append(greedy_estocastico(value, each))
-    return pruebas
-print("1")
-uavs = leer_archivo("t2_Deimos.txt")
-print("2")
-sorted_data = sorted(uavs, key=lambda x: x[1][1])
-print("3")
-estocastico = pruebas(sorted_data)
-print("4")
+#Titan
+titan = titan_greedy()
+print("Tabu Search: ")
+tabu_search(titan,10,100)
+print("------------------------------------")
+tabu_search(titan,10,100)
+print("------------------------------------")
+tabu_search(titan,10,100)
+print("------------------------------------")
+tabu_search(titan,10,100)
+print("------------------------------------")
+tabu_search(titan,10,100)
+print("------------------------------------")
 
-print(tabu_search(estocastico[0],10,100))
+#Europa
+europa = europa_greedy()
+print("Tabu Search: ")
+tabu_search(europa, 10, 50)
+print("------------------------------------")
+tabu_search(europa, 10, 50)
+print("------------------------------------")
+tabu_search(europa, 10, 50)
+print("------------------------------------")
+tabu_search(europa, 10, 50)
+print("------------------------------------")
+tabu_search(europa, 10, 50)
+print("------------------------------------")
+
+#Deimos
+deimos = deimos_greedy()
+print("Tabu Search: ")
+tabu_search(deimos, 10, 10)
+print("------------------------------------")
+tabu_search(deimos, 10, 10)
+print("------------------------------------")
+tabu_search(deimos, 10, 10)
+print("------------------------------------")
+tabu_search(deimos, 10, 10)
+print("------------------------------------")
+tabu_search(deimos, 10, 10)
+print("------------------------------------")
+
+
+
