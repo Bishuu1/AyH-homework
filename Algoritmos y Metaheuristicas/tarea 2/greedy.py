@@ -8,18 +8,18 @@ import numpy as np
 
 # Obtener datos desde archivo t2_Deimos.txt
 def leer_archivo(doc):
-    # Reemplaza "datos.txt" con la ruta y nombre de tu archivo
+
     archivo = open(doc, "r")
     lineas = archivo.readlines()
     num_naves = int(lineas[0])
-    uavs = []  # uav tiene 3 elementos: id, limites timpo y tiempos requeridos
+    # uav tiene 3 elementos: id, limites timpo y tiempos requeridos
+    uavs = [] 
     limites_tiempo = []
     tiempos_requeridos = []
     indice = 1  # indice para recorrer lineas
     for i in range(num_naves):
         count = 0
         limite = list(map(int, lineas[indice].split()))
-        # limites_tiempo.append(limite)  # limite de tiempo (min, pref, max)
         indice += 1
         tiempos = list(map(int, lineas[indice].split()))
         tiempos_requeridos.append(tiempos)
@@ -76,11 +76,25 @@ def costo(aterrizajes):
             
     return costo
 
-greedy1 = greedy("t2_Titan.txt")
-print("Costo para Titan: ", costo(greedy1))
+def titan_greedy ():
+    print("Greedy para Titan")
+    titan = greedy("t2_Titan.txt")
+    print("Costo para Titan: ", costo(titan))
+    return titan
 
-greedy2 = greedy("t2_Europa.txt")
-print("Costo para Europa: ", costo(greedy2))
+def europa_greedy ():
+    print("Greedy para Europa")
+    europa = greedy("t2_Europa.txt")
+    print("Costo para Europa: ", costo(europa))
+    return europa
 
-greedy3 = greedy("t2_Deimos.txt")
-print("Costo para Deimos: ", costo(greedy3))
+def deimos_greedy ():
+    print("Greedy para Deimos")
+    deimos = greedy("t2_Deimos.txt")
+    print("Costo para Deimos: ", costo(deimos))
+    return deimos
+
+if __name__ == "__main__":
+    titan_greedy()
+    europa_greedy()
+    deimos_greedy()

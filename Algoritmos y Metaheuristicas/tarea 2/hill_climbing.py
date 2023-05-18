@@ -2,6 +2,7 @@ import copy
 import time
 import random
 from greedy_estocastico import costo, europa, titan, deimos
+from greedy import titan_greedy, europa_greedy, deimos_greedy
 def hill_climbing_alguna_mejora(data):
     # Dado un orden estocastico, se intenta mejorar el orden de aterrizaje de los uavs
     # Para esto, se toma un uav y se mueve a la derecha hasta encontrar una mejora de costo
@@ -40,6 +41,22 @@ def hill_climbing_alguna_mejora(data):
     #pretty_print(mejor_orden)
     return mejor_orden
 
+#Titan greedy
+print("------------------------------------")
+titan_greedy = titan_greedy()
+print("Hill Climbing con alguna mejora: ")
+hill_climbing_alguna_mejora(titan_greedy)
+print("------------------------------------")
+#Europa greedy
+europa_greedy = europa_greedy()
+print("Hill Climbing con alguna mejora: ")
+hill_climbing_alguna_mejora(europa_greedy)
+print("------------------------------------")
+#Deimos greedy
+deimos_greedy = deimos_greedy()
+print("Hill Climbing con alguna mejora: ")
+hill_climbing_alguna_mejora(deimos_greedy)
+print("------------------------------------")
 #Titan
 titan = titan()
 print("Hill Climbing con alguna mejora: ")
